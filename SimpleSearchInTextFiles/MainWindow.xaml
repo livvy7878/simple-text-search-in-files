@@ -6,7 +6,25 @@
         xmlns:local="clr-namespace:SimpleSearchInTextFiles"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
-    </Grid>
+	<Window.DataContext>
+		<StaticResource ResourceKey="MainViewModel"/>
+	</Window.DataContext>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<StackPanel>
+			<Label Content="Where to search" />
+			<TextBox Text="{Binding CurrentPathToSearch, Mode=OneWayToSource}"/>
+			<Label Content="Search this" />
+			<TextBox Text="{Binding CurrentTextToSearch, Mode=OneWayToSource}"/>
+		</StackPanel>
+	</Grid>
 </Window>
