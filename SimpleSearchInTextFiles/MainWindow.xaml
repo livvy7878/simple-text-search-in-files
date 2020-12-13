@@ -20,11 +20,17 @@
 			<RowDefinition />
 			<RowDefinition />
 		</Grid.RowDefinitions>
-		<StackPanel>
-			<Label Content="Where to search" />
-			<TextBox Text="{Binding CurrentPathToSearch, Mode=OneWayToSource}"/>
-			<Label Content="Search this" />
-			<TextBox Text="{Binding CurrentTextToSearch, Mode=OneWayToSource}"/>
-		</StackPanel>
+		<UniformGrid Rows="2">
+			<StackPanel>
+				<Label Content="Where to search" />
+				<TextBox Text="{Binding CurrentPathToSearch, Mode=OneWayToSource}"/>
+				<Label Content="Search this" />
+				<TextBox Text="{Binding CurrentTextToSearch, Mode=OneWayToSource}"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+				<Button Height="30" Width="60" Margin="20" Content="Stop" />
+				<Button Height="30" Width="60" Margin="20" Content="Start"/>
+			</StackPanel>
+		</UniformGrid>
 	</Grid>
 </Window>
