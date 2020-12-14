@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Documents;
 
@@ -30,14 +31,21 @@ namespace SimpleSearchInTextFiles
 
 		public MainViewModel()
 		{
-			FindedItems = new List<FindedItem>()
+			FindedItems = new ObservableCollection<FindedItem>()
 			{
-				new FindedItem(),
-				new FindedItem(),
-				new FindedItem()
+				new FindedItem("Some path one", 10),
+				new FindedItem("Some path two", 110),
+				new FindedItem("Some path three", 1340)
 			};
+
+			Commands = new Commands(this);
+
+			CurrentTextToSearch = "Your";
+			CurrentPathToSearch = "E:\\Text searcher test";
 		}
 
-		public List<FindedItem> FindedItems { get; set; }
+		public ObservableCollection<FindedItem> FindedItems { get; set; }
+
+		public Commands Commands { get; private set; }
 	}
 }

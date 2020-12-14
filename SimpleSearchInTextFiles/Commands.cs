@@ -1,38 +1,52 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 
 namespace SimpleSearchInTextFiles
 {
-	public class Commands
+	internal class Commands
 	{
+		private readonly MainViewModel _mainViewModel;
+		private CommandsBase _startSearchForEntries;
 
+		public Commands(MainViewModel mainViewModel)
+		{
+			_mainViewModel = mainViewModel;
+		}
+
+		public CommandsBase StartSearchForEntries
+		{
+			get
+			{
+				return _startSearchForEntries ??= _startSearchForEntries = new CommandsBase(obj =>
+				{
+					if (_mainViewModel.CurrentPathToSearch.Length == 0 || _mainViewModel.CurrentTextToSearch.Length == 0)
+					{
+						return;
+					}
+					TextFilesParse.SearchForEntriesInSpecifiedPath(_mainViewModel.CurrentPathToSearch,
+						_mainViewModel.CurrentTextToSearch);
+				});
+			}
+		}
 	}
 
-	public class CommandsBase : ICommand
+	internal static class TextFilesParse
 	{
-		private Action<object> _execute;
-		private Func<object, bool> _canExecute;
-
-		public CommandsBase(Action<object> execute, Func<object, bool> canExecute)
+		public static ObservableCollection<FindedItem> SearchForEntriesInSpecifiedPath(string pathToSearch,
+			string textToSearch)
 		{
-			_execute = execute;
-			_canExecute = canExecute;
+			var listForFindedItemsEntries = new ObservableCollection<FindedItem>();
+
+			string[] allTextFilesInSpecifiedPath =
+				Directory.GetFileSystemEntries(pathToSearch).FilterListAndKeepOnlyTextFiles();
+
+			return listForFindedItemsEntries;
 		}
 
-		public bool CanExecute(object parameter)
+		public static string[] FilterListAndKeepOnlyTextFiles(this string[] allEntries)
 		{
-			return _canExecute == null || _canExecute(parameter);
-		}
-
-		public void Execute(object parameter)
-		{
-			_execute(parameter);
-		}
-
-		public event EventHandler CanExecuteChanged
-		{
-			add => CommandManager.RequerySuggested += value;
-			remove => CommandManager.RequerySuggested -= value;
+			return allEntries.Where(entry => entry.EndsWith(".txt")).ToArray();
 		}
 	}
 }
