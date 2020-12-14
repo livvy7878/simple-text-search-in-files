@@ -33,9 +33,9 @@ namespace SimpleSearchInTextFiles
 		{
 			FindedItems = new ObservableCollection<FindedItem>()
 			{
-				new FindedItem("Some path one", 10),
-				new FindedItem("Some path two", 110),
-				new FindedItem("Some path three", 1340)
+				new FindedItem("Some path one", 10,12),
+				new FindedItem("Some path two", 110,34),
+				new FindedItem("Some path three", 1340,56)
 			};
 
 			Commands = new Commands(this);
