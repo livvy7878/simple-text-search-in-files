@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Documents;
 
 namespace SimpleSearchInTextFiles
 {
@@ -14,13 +16,13 @@ namespace SimpleSearchInTextFiles
 
 		public string CurrentPathToSearch
 		{
-			get => (string) GetValue(CurrentPathToSearchProperty);
+			get => (string)GetValue(CurrentPathToSearchProperty);
 			set => SetValue(CurrentPathToSearchProperty, value);
 		}
 
 		public string CurrentTextToSearch
 		{
-			get => (string) GetValue(CurrentTextToSearchProperty);
+			get => (string)GetValue(CurrentTextToSearchProperty);
 			set => SetValue(CurrentTextToSearchProperty, value);
 		}
 
@@ -28,7 +30,14 @@ namespace SimpleSearchInTextFiles
 
 		public MainViewModel()
 		{
-
+			FindedItems = new List<FindedItem>()
+			{
+				new FindedItem(),
+				new FindedItem(),
+				new FindedItem()
+			};
 		}
+
+		public List<FindedItem> FindedItems { get; set; }
 	}
 }
