@@ -16,21 +16,39 @@
 			<ColumnDefinition />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition />
-			<RowDefinition />
-		</Grid.RowDefinitions>
 		<UniformGrid Rows="2">
 			<StackPanel>
 				<Label Content="Where to search" />
 				<TextBox Text="{Binding CurrentPathToSearch, Mode=TwoWay}"/>
 				<Label Content="Search this" />
 				<TextBox Text="{Binding CurrentTextToSearch, Mode=TwoWay}"/>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-				<Button Height="30" Width="60" Margin="20" Content="Stop" />
-				<Button Height="30" Width="60" Margin="20" Content="Start" Command="{Binding Commands.StartSearchForEntries}"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+					<Button Height="30" Width="60" Margin="20" Content="Stop" />
+					<Button Height="30" Width="60" Margin="20" Content="Start" Command="{Binding Commands.StartSearchForEntries}"/>
+				</StackPanel>
 			</StackPanel>
 		</UniformGrid>
+		<ListView Grid.Column="1" ItemsSource="{Binding FindedItems}">
+			<ListView.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel/>
+				</ItemsPanelTemplate>
+			</ListView.ItemsPanel>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<UniformGrid Rows="3">
+						<Label Content="{Binding PathWhereFinded}" FontWeight="Bold"/> 
+						<StackPanel Orientation="Horizontal">
+							<Label Content="Number of line: "/>
+							<Label Content="{Binding NumberOfLineWhereFinded}"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<Label Content="Number of symbol: "/>
+							<Label Content="{Binding NumberOfSymbolWhereFinded}"/>
+						</StackPanel>
+					</UniformGrid>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
 	</Grid>
 </Window>

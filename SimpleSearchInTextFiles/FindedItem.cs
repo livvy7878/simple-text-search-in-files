@@ -10,6 +10,7 @@ namespace SimpleSearchInTextFiles
 		{
 			PathWhereFinded = pathWhereFinded;
 			NumberOfLineWhereFinded = numberOfLineWhereFinded;
+			NumberOfSymbolWhereFinded = numberOfSymbolWhereFinded;
 		}
 		public string PathWhereFinded { get; set; }
 		public int NumberOfLineWhereFinded { get; set; }

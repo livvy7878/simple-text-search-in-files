@@ -31,17 +31,17 @@ namespace SimpleSearchInTextFiles
 
 		public MainViewModel()
 		{
-			FindedItems = new ObservableCollection<FindedItem>()
-			{
-				new FindedItem("Some path one", 10,12),
-				new FindedItem("Some path two", 110,34),
-				new FindedItem("Some path three", 1340,56)
-			};
+			FindedItems = new ObservableCollection<FindedItem>();
+			//{
+			//	new FindedItem("Some path one", 10, 12),
+			//	new FindedItem("Some path two", 110, 34),
+			//	new FindedItem("Some path three", 1340, 56)
+			//};
 
 			Commands = new Commands(this);
 
-			CurrentTextToSearch = "Your";
-			CurrentPathToSearch = "E:\\Text searcher test";
+			CurrentTextToSearch = "";
+			CurrentPathToSearch = "";
 		}
 
 		public ObservableCollection<FindedItem> FindedItems { get; set; }
